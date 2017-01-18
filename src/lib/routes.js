@@ -25,6 +25,7 @@ function serveAuthGet(req, res) {
   .fail(function(err) {
     replies.authentication_failed(res);
     console.error(err);
+    console.error(err.stack);
   });
 }
 
