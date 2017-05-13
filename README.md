@@ -37,13 +37,13 @@ quickly. First clone the repo make sure you don't have anything listening on
 port 8080 before starting. 
 Add the following lines to your /etc/hosts to simulate multiple subdomains
 
-    127.0.0.1       secret.test.local
-    127.0.0.1       secret1.test.local
-    127.0.0.1       secret2.test.local
-    127.0.0.1       home.test.local
-    127.0.0.1       mx1.mail.test.local
-    127.0.0.1       mx2.mail.test.local
-    127.0.0.1       auth.test.local
+    127.0.0.1       secret.example.com
+    127.0.0.1       secret1.example.com
+    127.0.0.1       secret2.example.com
+    127.0.0.1       home.example.com
+    127.0.0.1       mx1.mail.example.com
+    127.0.0.1       mx2.mail.example.com
+    127.0.0.1       auth.example.com
     
 Then, type the following command to build and deploy the services:
 
@@ -51,7 +51,7 @@ Then, type the following command to build and deploy the services:
     docker-compose up -d
 
 After few seconds the services should be running and you should be able to visit 
-[https://home.test.local:8080/](https://home.test.local:8080/). 
+[https://home.example.com/](https://home.example.com/). 
 
 Normally, a self-signed certificate exception should appear, it has to be 
 accepted before getting to the login page:
@@ -65,14 +65,14 @@ access control list:
 - **john / password** is in the admin group and has access to the secret from
 any subdomain.
 - **bob / password** is in the dev group and has access to the secret from
-  - [secret.test.local](https://secret.test.local:8080/secret.html) 
-  - [secret2.test.local](https://secret2.test.local:8080/secret.html)
-  - [home.test.local](https://home.test.local:8080/secret.html)
-  - [\*.mail.test.local](https://mx1.mail.test.local:8080/secret.html)
+  - [secret.example.com](https://secret.example.com/secret.html) 
+  - [secret2.example.com](https://secret2.example.com/secret.html)
+  - [home.example.com](https://home.example.com/secret.html)
+  - [\*.mail.example.com](https://mx1.mail.example.com/secret.html)
 - **harry / password** is not in a group but has rules giving him has access to 
  the secret from 
-  - [secret1.test.local](https://secret1.test.local:8080/secret.html)
-  - [home.test.local](https://home.test.local:8080/secret.html)
+  - [secret1.example.com](https://secret1.example.com/secret.html)
+  - [home.example.com](https://home.example.com/secret.html)
 
 Type them in the login page and validate. Then, the second factor page should 
 have appeared as shown below.

@@ -13,6 +13,9 @@ script:
 - npm test
 - docker build -t clems4ever/authelia .
 - docker-compose build
+- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+- docker-compose -f docker-compose.yml -f docker-compose.dev.yml run test
+- docker-compose -f docker-compose.yml -f docker-compose.dev.yml down
 - docker-compose up -d
 - sleep 5
 - ./scripts/check_services.sh

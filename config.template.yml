@@ -48,18 +48,18 @@ ldap:
 # beginning of the pattern.
 access_control:
   default:
-    - home.test.local
+    - home.example.com
   groups:
     admin:
-      - '*.test.local'
+      - '*.example.com'
     dev:
-      - secret.test.local
-      - secret2.test.local
+      - secret.example.com
+      - secret2.example.com
   users: 
     harry:
-      - secret1.test.local
+      - secret1.example.com
     bob:
-      - '*.mail.test.local'
+      - '*.mail.example.com'
 
 
 # Configuration of session cookies
@@ -72,7 +72,7 @@ access_control:
 session:
   secret: unsecure_secret
   expiration: 3600000
-  domain: test.local
+  domain: example.com
 
 
 # The directory where the DB files will be saved

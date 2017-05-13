@@ -3,10 +3,30 @@ version: '2'
 services:
   auth:
     volumes:
+      - ./package.json:/usr/src/package.json
       - ./test:/usr/src/test
       - ./src/views:/usr/src/views
       - ./src/public_html:/usr/src/public_html
       - ./config.yml:/etc/auth-server/config.yml:ro
+
+  test:
+    build: .
+    command: npm run-script int-test
+    volumes:
+      - ./package.json:/usr/src/package.json
+      - ./test:/usr/src/test
+      - ./src/views:/usr/src/views
+      - ./src/public_html:/usr/src/public_html
+      - ./config.yml:/etc/auth-server/config.yml:ro
+      - ./notifications:/var/lib/auth-server/notifications
+    links:
+      - nginx:auth.example.com
+      - nginx:home.example.com
+      - nginx:secret.example.com
+      - nginx:secret1.example.com
+      - nginx:secret2.example.com
+      - nginx:mx1.mail.example.com
+      - nginx:mx2.mail.example.com
 
   ldap-admin:
     image: osixia/phpldapadmin:0.6.11
@@ -15,3 +35,4 @@ services:
     environment:
       - PHPLDAPADMIN_LDAP_HOSTS=ldap 
       - PHPLDAPADMIN_HTTPS=false
+
